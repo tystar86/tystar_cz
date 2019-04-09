@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-from .secrets import DB_NAME, DB_USER, DB_PASSWORD
+from .secrets import DB_NAME, DB_USER, DB_PASSWORD, ALLOWED_HOSTS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -28,7 +28,7 @@ SECRET_KEY = os.path.join(PROJECT_DIR, "settings/secrets.py")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ALLOWED_HOSTS
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'base',
     'blog',
 ]
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'tystar_cz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,5 +126,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [STATIC_DIR, ]
 
 STATIC_URL = '/static/'
