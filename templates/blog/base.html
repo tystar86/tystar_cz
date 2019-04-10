@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
+
 {% load hosts %}
 
 <html lang="en">
@@ -21,14 +22,14 @@
 
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="{% host_url 'homepage' host 'base' %}">Homepage</a>
+      <a class="navbar-brand" href="{% host_url 'homepage' host 'www' %}">Homepage</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% host_url 'about' host 'base' %}">About</a>
+            <a class="nav-link" href="{% host_url 'about' host 'www' %}">About</a>
           </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">

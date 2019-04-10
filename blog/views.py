@@ -1,9 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(request):
     context = {
-        'homepage_url': '/',
-        'about_url': 'about/',
     }
     return render(request, 'blog/index.html', context)

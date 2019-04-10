@@ -64,8 +64,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'tystar_cz.urls'
 
 ROOT_HOSTCONF = 'tystar_cz.hosts'
-
-DEFAULT_HOST = 'base'
+DEFAULT_HOST = 'www'
+PARENT_HOST = 'mysite.local:8000'
 
 TEMPLATES = [
     {
