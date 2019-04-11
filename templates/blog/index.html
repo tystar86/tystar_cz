@@ -1,4 +1,8 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/blog_base.html' %}
+
+{% load staticfiles %}
+
+{% load hosts %}
 
 {% block headers %}
 <title>Blog Homepage</title>
@@ -6,6 +10,11 @@
 
 {% block content %}
 
-a
+<div class="container">
+    <h4>Top posts:</h4>
+    {% for post in top_posts %}
+        {{ post.name }}
+    {% endfor %}
+</div>
 
 {% endblock %}

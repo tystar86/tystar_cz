@@ -1,23 +1,21 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 
 {% load hosts %}
 
-<html>
+{% block headers %}
+<title>Homepage</title>
+{% endblock %}
 
-<head>
-    <title>Homepage</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>Homepage</h1>
+<div class="container">
+    <ul>
+        <li>
+            <a href="{% host_url 'index' host 'blog' %}">Blog</a>
+        </li>
+    </ul>
+</div>
 
-    <div>
-        <br>
-        <a href="{% url 'homepage' %}">Homepage</a>
-        <a href="{% url 'about' %}"> About</a>
-    </div>
-</body>
-
-</html>
+{% endblock %}

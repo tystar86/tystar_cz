@@ -1,29 +1,39 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 
 {% load hosts %}
 
-<html>
+{% block headers %}
+<style>
+    .flex-container {
+        display: flex;
+    }
+    .picture {
+        flex: 0.5;
+    }
+    .info {
+        flex: 6;
+    }
 
-<head>
-    <title>About</title>
-</head>
+</style>
 
-<body>
-    <h1>About</h1>
+<title>About</title>
+{% endblock %}
 
-    <div>
-        <br>
-        <a href="{% url 'homepage' %}">Homepage</a>
-        <a href="{% url 'about' %}"> About</a>
+{% block content %}
+
+<div class="flex-container">
+    <div class="container picture">
+        <img src="{% static 'images/me_photo.png' %}" style="width:100px;height:100px"; alt="My picture">
     </div>
-    <div>
-        <p>{{ name }} {{ surname }}</p>
-        <p><bold>Email: {{ email }}</bold></p>
-        <br>
-        <img src="{% static 'images/me_photo.png' %}" alt="My picture">
+    <div class="info">
+        <p><b>{{ name }} {{ surname }}</b></p>
+        <p><b>Email:</b> {{ email }}</p>
+        <a href="{{ twitter }}">Twitter</a>
+        <a href="{{ linkedin }}">LinkedIn</a>
+        <a href="{{ github }}">Github</a>
     </div>
-</body>
+</div>
 
-</html>
+{% endblock %}
