@@ -11,10 +11,38 @@
 {% block content %}
 
 <div class="container">
-    <h4>Top posts:</h4>
-    {% for post in top_posts %}
-        {{ post.name }}
-    {% endfor %}
+    <div class="container">
+        <h4>Latests posts:</h4>
+            {% for post in latest_posts %}
+            <ul>
+                <li>{{ post.title }}</li>
+            </ul>
+            {% endfor %}
+    </div>
+    <div class="container">
+        <h4>Top posts:</h4>
+            {% for post in top_posts %}
+            <ul>
+                <li>{{ post.title }}</li>
+            </ul>
+            {% endfor %}
+    </div>
+    <div class="container">
+        <h4>Top categories:</h4>
+            {% for category in top_categories %}
+            <ul>
+                <li>{{ category.name }}</li>
+            </ul>
+            {% endfor %}
+    </div>
+    <div class="container">
+        <h4>Top tags:</h4>
+            {% for tag in top_tags %}
+            <ul>
+                <li>{{ tag.name }}</li>
+            </ul>
+            {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
