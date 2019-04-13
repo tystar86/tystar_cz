@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
+{% load static %}
 
 {% load hosts %}
 
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-    {% block headers %}
-    {% endblock %}
+  {% block headers %}
+  {% endblock %}
 
 </head>
-
 <body>
-    {% block title %}
-    {% endblock %}
 
+<div class="container">
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="{% host_url 'homepage' host 'www' %}">Homepage</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% host_url 'about' host 'www' %}">About</a>
-          </li>
+    <header id="nav" class="hide-nav" role="banner">
+        <div class="header-logo">
+            <a href="/"><img src="{% static 'images/me_photo.png' %}" width="60" height="60" alt="my photo"></a>
+        </div>
+        <h1 class="site-title">
+          <a href="/"><img src="{% static 'images/me_photo.png' %}" /></a>{{ name }} {{ surname }}
+          <span class="toggle"></span>
+        </h1>
+        <p class="tag-line">Me, myself & python.</p>
+        <ul class="nav-links">
+            <li><a href="{% host_url 'homepage' host 'www' %}">Home</a></li>
+            <li><a href="{% host_url 'about' host 'www' %}">About me</a></li>
+            <li><a href="{% host_url 'index' host 'blog' %}">PyBlog</a></li>
         </ul>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% host_url 'index' host 'blog' %}">Blog</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+    </header>
 
-    {% block content %}
-    {% endblock %}
+    <main role="main">
+      {% block content %}
+      {% endblock %}
+
+    </main>
+
+    <footer role="contentinfo">
+        <div class="hr"></div>
+        <div class="footer-link">
+            <a href="mailto:{{ email }}" target="_blank">Email</a>
+            <a href="{{ twitter }}" target="_blank">Twitter</a>
+            <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
+            <a href="{{ github }}" target="_blank">GitHub</a>
+
+        <p>Created by tystar 2019</p>
+    </footer>
+</div>
 
 </body>
-
 </html>
+

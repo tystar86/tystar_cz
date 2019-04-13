@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block headers %}
+
+<title>PyBlog | Post</title>
+
+{% endblock %}
+
+{% block content %}
+
+<article itemscope="" itemtype="http://schema.org/BlogPosting">
+  <h1 class="entry-title" itemprop="headline">{{ post.title }}</h1>
+    <span class="entry-meta">
+      <time itemprop="datePublished" datetime="{{ post.created }}">Created on {{ post.created|date:'d M Y' }}&nbsp;&nbsp;&nbsp;</time>
+      {% if post.updated %}
+        <time itemprop="dateUpdated" datetime="{{ post.updated }}">Updated on {{ post.updated|date:'d M Y' }}</time>
+      {% endif %}
+
+      <ul class="index_category">
+        {% for category in post.category.all %}
+          <li><a href="/category/{{ category.slug }}">{{ category.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </span>
+
+  <section itemprop="entry-text">
+    <p>{{ post.text|linebreaksbr }}</p>
+    <hr>
+    <h3>Sources:</h3>
+    {% for source in post.source.all %}
+    <p><a href="{{ source.url }}">➡️ {{ source.name }}</a></p>
+    {% endfor %}
+
+  </section>
+</article>
+
+{% endblock %}

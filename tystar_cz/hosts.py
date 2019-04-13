@@ -3,7 +3,9 @@ from django_hosts import patterns, host
 
 
 host_patterns = patterns('',
-    host(r'admin', 'base.urls', name='admin'),
-    host(r'www', settings.ROOT_URLCONF, name='www'),
+    host(r'admin', settings.ROOT_URLCONF, name='admin'),
+    host(r'www', 'base.urls', name='www'),
     host(r'blog', 'blog.urls', name='blog'),
+    #host(r'prdel', 'prdel.url', name='prdel'),
+    #host(r'tmdb', 'base.url', name='tmdb'),
 )

@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 
-{% load staticfiles %}
-
-{% load hosts %}
-
 {% block headers %}
+
 <title>Homepage</title>
+
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div>
+  <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
     <ul>
-        <li>
-            <a href="{% host_url 'index' host 'blog' %}">Blog</a>
-        </li>
+        {% for resource in resources %}
+            <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 

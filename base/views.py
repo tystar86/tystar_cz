@@ -1,13 +1,10 @@
 from django.shortcuts import render
 
+from blog.models import Resource
+
 
 def homepage(request):
-    context = {
-    }
-    return render(request, 'homepage.html', context)
-
-
-def about(request):
+    resources = Resource.objects.all()
     context = {
         'name': 'Štěpánka',
         'surname': 'Lucinová',
@@ -15,5 +12,10 @@ def about(request):
         'twitter': 'https://twitter.com/tystarcz',
         'linkedin': 'https://www.linkedin.com/in/stepankalucinova/',
         'github': 'https://github.com/tystar86',
+        'resources': resources,
     }
-    return render(request, 'about.html', context)
+    return render(request, 'homepage.html', context)
+
+
+def about(request):
+    return render(request, 'about.html')
