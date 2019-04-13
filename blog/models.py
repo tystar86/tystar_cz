@@ -19,7 +19,7 @@ class Resource(models.Model):
 
 class Category(models.Model):
     name        = models.CharField(max_length=30)
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, blank=True, null=True)
 
     slug        = models.SlugField()
 
