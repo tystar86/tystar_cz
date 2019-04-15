@@ -62,7 +62,9 @@
           <ul>
               {% for resource in resources %}
                   <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
+                  <ul>
                     <li style="list-style-type: disc; font-size: small;">{{ resource.description }}</li>
+                  </ul>
               {% endfor %}
           </ul>
       </div>
