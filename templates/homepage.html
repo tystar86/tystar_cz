@@ -1,20 +1,90 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 
-{% block headers %}
+{% load static %}
 
-<title>Homepage</title>
+{% load hosts %}
 
-{% endblock %}
+<html lang="en">
+<head>
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138306240-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-{% block content %}
+  gtag('config', 'UA-138306240-1');
+</script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This is a blog about Python and Django and some stuff around.">
+  <link rel="canonical" href="http://tystar.cz/">
 
-<div>
-  <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
-    <ul>
-        {% for resource in resources %}
-            <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
-        {% endfor %}
-    </ul>
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+  {% block headers %}
+
+  <title>Homepage</title>
+
+  {% endblock %}
+
+</head>
+<body>
+
+<div class="container">
+
+    <header id="nav" class="hide-nav" role="banner">
+        <div class="header-logo">
+            <a href="/"><img src="{% static 'images/me_photo.png' %}" width="60" height="60" alt="my photo"></a>
+        </div>
+        <h1 class="site-title">
+          <a href="/"><img src="{% static 'images/me_photo.png' %}" /></a>{{ name }} {{ surname }}
+          <span class="toggle"></span>
+        </h1>
+        <p class="tag-line">Me, myself & python.</p>
+        <ul class="nav-links">
+            <li><a href="{% host_url 'homepage' host 'www' %}">Home</a></li>
+            <li><a href="{% host_url 'about' host 'www' %}">About me</a></li>
+            <li><a href="{% host_url 'index' host 'blog' %}">PyBlog</a></li>
+        </ul>
+    </header>
+
+    <main role="main">
+      {% block content %}
+
+      <div>
+        <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
+          <ul>
+              {% for resource in resources %}
+                  <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
+                  <div class="container">
+                      <p>{{ resource.description }}</p>
+                  </div>
+              {% endfor %}
+          </ul>
+      </div>
+
+      {% endblock %}
+
+    </main>
+
+    <footer role="contentinfo">
+        <div class="hr"></div>
+        <div class="footer-link">
+            <a href="mailto:{{ email }}" target="_blank">Email</a>
+            <a href="{{ twitter }}" target="_blank">Twitter</a>
+            <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
+            <a href="{{ github }}" target="_blank">GitHub</a>
+
+        <p>Created by tystar 2019</p>
+    </footer>
 </div>
 
-{% endblock %}
+</body>
+</html>
+

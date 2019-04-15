@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'django_hosts',
     'django_extensions',
+    'ckeditor',
 
     'base',
     'blog',

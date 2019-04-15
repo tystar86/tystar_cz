@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'homepage.html' %}
 
 {% block headers %}
 
@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block content %}
+
+{{ block.super }}
 
 <article itemscope="" itemtype="http://schema.org/BlogPosting">
   <h1 class="entry-title" itemprop="headline">{{ post.title }}</h1>
@@ -24,13 +26,12 @@
     </span>
 
   <section itemprop="entry-text">
-    <p>{{ post.text|linebreaksbr }}</p>
+    <p>{{ post.content|safe|escape }}</p>
     <hr>
     <h3>Sources:</h3>
     {% for source in post.source.all %}
     <p><a href="{{ source.url }}">➡️ {{ source.name }}</a></p>
     {% endfor %}
-
   </section>
 </article>
 

@@ -3,12 +3,21 @@ from django.shortcuts import render
 from .models import Post, Category
 
 
+_BASE_CONTEXT = {
+        'name': 'Štěpánka',
+        'surname': 'Lucinová',
+        'email': 'stepankalucinova@gmail.com',
+        'twitter': 'https://twitter.com/tystarcz',
+        'linkedin': 'https://www.linkedin.com/in/stepankalucinova/',
+        'github': 'https://github.com/tystar86',
+    }
 def index(request):
     latest_posts = Post.objects.order_by('created')
-
     context = {
         'latest_posts': latest_posts,
     }
+    context = {**context, **_BASE_CONTEXT}
+
     return render(request, 'blog/index.html', context)
 
 
@@ -17,6 +26,7 @@ def post(request, post_slug):
     context = {
         'post': post,
     }
+
     return render(request, 'blog/post.html', context)
 
 
@@ -25,6 +35,7 @@ def category(request, category_slug):
     context = {
         'category': category,
     }
+
     return render(request, 'blog/category.html', context)
 
 # from django.db.models import Count
