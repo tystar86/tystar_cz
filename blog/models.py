@@ -12,6 +12,7 @@ class Tag(models.Model):
 class Resource(models.Model):
     name = models.CharField(max_length=30)
     url  = models.URLField(max_length=200)
+    description = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
         return self.name
