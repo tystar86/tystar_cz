@@ -62,9 +62,7 @@
           <ul>
               {% for resource in resources %}
                   <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
-                  <div class="container">
-                      <p>{{ resource.description }}</p>
-                  </div>
+                    <li style="list-style-type: disc; font-size: small;">{{ resource.description }}</li>
               {% endfor %}
           </ul>
       </div>
@@ -80,7 +78,8 @@
             <a href="{{ twitter }}" target="_blank">Twitter</a>
             <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
             <a href="{{ github }}" target="_blank">GitHub</a>
-
+        <br>
+        <br>
         <p>Created by tystar 2019</p>
     </footer>
 </div>
