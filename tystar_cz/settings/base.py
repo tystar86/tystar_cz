@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_hosts',
     'django_extensions',
     'ckeditor',
+    'ckeditor_uploader',
 
     'base',
     'blog',
@@ -145,3 +146,35 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+
+
+# Media files (Uploaded images)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+# CKEditor
+CKEDITOR_UPLOAD_PATH = 'media/'
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'height': 500,
+        'toolbar_Custom': [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'SpecialChar'], ['Source'],
+        ],
+    },
+    'special': {
+        'toolbar': 'Special',
+        'toolbar_Special': [
+            ['Bold'], ['CodeSnippet'],
+        ],
+        'extraPlugins': 'codesnippet',
+    }
+}

@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Tag(models.Model):
@@ -40,7 +40,7 @@ class Post(models.Model):
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
     title       = models.CharField(max_length=50, unique=True)
-    content        = RichTextField()
+    content        = RichTextUploadingField()
     tag         = models.ManyToManyField(Tag, blank=True)
     category    = models.ManyToManyField(Category, blank=True)
     resource      = models.ManyToManyField(Resource, blank=True)
