@@ -81,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -160,21 +162,8 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'Custom',
-        'height': 500,
-        'toolbar_Custom': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source'],
-        ],
-    },
-    'special': {
-        'toolbar': 'Special',
-        'toolbar_Special': [
-            ['Bold'], ['CodeSnippet'],
-        ],
+        'toolbar': None,
         'extraPlugins': 'codesnippet',
-    }
+    },
+
 }
