@@ -10,7 +10,7 @@ admin.site.register(Tag, TagAdmin)
 
 
 class ResourceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'url', 'title', 'description')
+    list_display = ('id', 'url', 'name', 'description')
     search_list = ['url', 'title', 'description']
 admin.site.register(Resource, ResourceAdmin)
 
