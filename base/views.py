@@ -12,7 +12,7 @@ _BASE_CONTEXT = {
         'github': 'https://github.com/tystar86',
     }
 def homepage(request):
-    resources = Resource.objects.all()
+    resources = Resource.objects.exclude(name=None)
     context = {
         'resources': resources,
     }
