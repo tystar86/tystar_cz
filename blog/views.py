@@ -1,6 +1,7 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from .models import Post, Category
+from .models import Post, Category, Tag
 
 
 _BASE_CONTEXT = {
@@ -12,7 +13,17 @@ _BASE_CONTEXT = {
         'github': 'https://github.com/tystar86',
     }
 def index(request):
-    latest_posts = Post.objects.order_by('created')
+    latest_posts_list = Post.objects.filter(is_public=True).order_by('-created')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(latest_posts_list, 5)
+
+    try:
+        latest_posts = paginator.page(page)
+    except PageNotAnInteger:
+        latest_posts = paginator.page(1)
+    except EmptyPage:
+        latest_posts = paginator.page(paginator.num_pages)
+
     context = {
         'latest_posts': latest_posts,
     }
@@ -37,6 +48,15 @@ def category(request, category_slug):
     }
 
     return render(request, 'blog/category.html', context)
+
+
+def tag(request, tag_slug):
+    tag = Tag.objects.get(slug=tag_slug)
+    context = {
+        'tag': tag,
+    }
+
+    return render(request, 'blog/tag.html', context)
 
 # from django.db.models import Count
 #    top_categories = Category.objects.annotate(num_posts=Count('post')).order_by('-num_posts')[:5]

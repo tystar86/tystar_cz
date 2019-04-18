@@ -62,9 +62,9 @@
         <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
           <ul>
               {% for resource in resources %}
-                  <li><a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a></li>
+                  <li><a href="{{ resource.url }}" target="_blank">{{ resource.url }}</a></li>
                   <ul>
-                    <li style="list-style-type: disc; font-size: small;">{{ resource.description }}</li>
+                    <li style="list-style-type: disc; font-size: small;">{{ resource.url }}</li>
                   </ul>
               {% endfor %}
           </ul>

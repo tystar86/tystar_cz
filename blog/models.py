@@ -1,33 +1,26 @@
-from django.db import models
-from django.template.defaultfilters import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.db import models
+from django_extensions.db.fields import AutoSlugField
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=30)
+    name = AutoSlugField(unique=True, max_length=30, populate_from=['name'])
 
     def __str__(self):
         return self.name
 
 
 class Resource(models.Model):
-    name = models.CharField(max_length=30)
-    url  = models.URLField(max_length=200)
-    description = models.CharField(max_length=300, blank=True, null=True)
+    url = models.URLField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.url
 
 
 class Category(models.Model):
     name        = models.CharField(max_length=30)
     description = models.CharField(max_length=300, blank=True, null=True)
-
-    slug        = models.SlugField()
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+    slug        = AutoSlugField(unique=True, max_length=30, populate_from=['name'])
 
     def __str__(self):
         return self.name
@@ -39,16 +32,11 @@ class Category(models.Model):
 class Post(models.Model):
     created     = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
-    title       = models.CharField(max_length=50, unique=True)
-    content        = RichTextUploadingField()
+    title       = models.CharField(max_length=200, unique=True)
+    content     = RichTextUploadingField()
     tag         = models.ManyToManyField(Tag, blank=True)
     category    = models.ManyToManyField(Category, blank=True)
-    resource      = models.ManyToManyField(Resource, blank=True)
+    resource    = models.ManyToManyField(Resource, blank=True)
     likes       = models.IntegerField(default=0)
     is_public   = models.BooleanField(default=True)
-
-    slug        = models.SlugField()
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+    slug        = AutoSlugField(unique=True, max_length=30, populate_from=['title'])

@@ -1,0 +1,26 @@
+{% extends 'homepage.html' %}
+
+{% block headers %}
+
+<title>PyBlog | Tag</title>
+
+{% endblock %}
+
+{% block content %}
+
+<h1>#{{ tag.name }}</h1>
+
+<ul>
+    {% for post in tag.post_set.all %}
+    <article itemscope="" itemtype="http://schema.org/Blog">
+        <h2 class="entry-title" itemprop="headline">
+            <a href="/post/{{ post.slug }}">{{ post.title }}</a>
+        </h2>
+        <span class="entry-meta">
+            <time itemprop="datePublished" datetime="{{ post.created }}">{{ post.created|date:'d M Y' }}</time>
+        </span>
+    </article>
+    {% endfor %}
+</ul>
+
+{% endblock %}
