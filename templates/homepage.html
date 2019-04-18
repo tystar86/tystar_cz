@@ -62,9 +62,11 @@
           <ul>
               {% for resource in resources %}
                   <li><a href="{{ resource.url }}" style="text-decoration: none;" target="_blank">{{ resource.name }}</a></li>
+                  {% if resource.description %}
                   <ul>
                     <li>{{ resource.description }}</li>
                   </ul>
+                  {% endif %}
               {% endfor %}
           </ul>
       </div>
