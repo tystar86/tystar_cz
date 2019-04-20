@@ -15,7 +15,7 @@ _BASE_CONTEXT = {
 def index(request):
     latest_posts_list = Post.objects.filter(is_public=True).order_by('-created')
     page = request.GET.get('page', 1)
-    paginator = Paginator(latest_posts_list, 10)
+    paginator = Paginator(latest_posts_list, 8)
 
     try:
         latest_posts = paginator.page(page)

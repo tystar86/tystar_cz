@@ -9,12 +9,12 @@
 {% block content %}
 
 <ul>
-    {% for post in latest_posts %}
+  {% for post in latest_posts %}
     <article itemscope="" itemtype="http://schema.org/Blog">
-        <h2 class="entry-title" itemprop="headline"><a href="/post/{{ post.slug }}">{{ post.title }}</a></h2>
+      <h2 class="entry-title" itemprop="headline"><a href="/post/{{ post.slug }}">{{ post.title }}</a></h2>
         <span class="entry-meta"><time itemprop="datePublished" datetime="{{ post.created }}">{{ post.created|date:'d M Y' }}</time></span>
-    </article>
-    {% endfor %}
+  </article>
+  {% endfor %}
 </ul>
 
 {% if latest_posts.has_other_pages %}
