@@ -21,7 +21,7 @@
           <li><a href="/category/{{ category.slug }}">{{ category.name }}</a></li>
         {% endfor %}
       </ul>
-      <ul class="index_category">
+      <ul class="index_tag">
         {% for tag in post.tag.all %}
           <li><a href="/tag/{{ tag.slug }}">#{{ tag.name }}</a></li>
         {% endfor %}
@@ -31,10 +31,12 @@
   <section itemprop="entry-text">
     <p>{{ post.content|safe|escape }}</p>
     <hr>
-    <h3>Resources:</h3>
-    {% for resource in post.resource.all %}
-    <p>➡️<a href="{{ resource.url }}">{{ resource.url }}</a></p>
-    {% endfor %}
+    {% if post.resource %}
+      <h3>Resources:</h3>
+      {% for resource in post.resource.all %}
+      <p>➡️<a href="{{ resource.url }}">{{ resource.url }}</a></p>
+      {% endfor %}
+    {% endif %}
   </section>
 </article>
 

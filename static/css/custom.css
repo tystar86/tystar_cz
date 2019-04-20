@@ -108,17 +108,11 @@ ul.index_category li a{
   color: #5c5454;
   font-size: 14px;
 }
-ul.index_tag li{
+ul.index_tag{
   list-style: none;
-  margin: 5px 0;
-  border: 1px solid black;
-  border-radius: 3px;
-  display: inline-block;
-  background: #5291bd24;
   text-decoration: none;
-  padding: 0 5px;
-  color: #5c5454;
-  font-size: 14px;
+  display: inline-block;
+  padding: 0 10px 0 0;
 }
 
 header{
@@ -202,4 +196,27 @@ header h1{
   .site-title img{
     display: none;
   }
+}
+
+.pagination {
+    clear:both;
+    position:relative;
+    font-size:15px;
+    text-align:center;
+}
+
+.pagination span, .pagination a {
+    display:inline-block;
+    margin: 2px 2px 2px 0;
+    padding:6px 9px 5px 9px;
+    text-decoration:none;
+}
+
+.pagination .current{
+    padding:6px 9px 5px 9px;
+    font-weight: bold;
+}
+.pagination li{
+  display: inline;
+  list-style: none;
 }
