@@ -30,9 +30,9 @@
 
   <section itemprop="entry-text">
     <p>{{ post.content|safe|escape }}</p>
+    {% if post.resource.all %}
     <hr>
-    {% if post.resource %}
-      <h3>Resources:</h3>
+        <h3>Resources:</h3>
       {% for resource in post.resource.all %}
       <p>➡️<a href="{{ resource.url }}">{{ resource.url }}</a></p>
       {% endfor %}
