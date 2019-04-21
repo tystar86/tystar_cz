@@ -32,8 +32,8 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    created     = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now=True)
+    created     = models.DateField(auto_now_add=True)
+    updated     = models.DateField(auto_now=True)
     title       = models.CharField(max_length=200, unique=True)
     content     = RichTextUploadingField()
     tag         = models.ManyToManyField(Tag, blank=True)

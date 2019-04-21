@@ -12,7 +12,7 @@
   <h1 class="entry-title" itemprop="headline">{{ post.title }}</h1>
     <span class="entry-meta">
       <time itemprop="datePublished" datetime="{{ post.created }}">Created on {{ post.created|date:'d M Y' }}&nbsp;&nbsp;&nbsp;</time>
-      {% if post.updated %}
+      {% if post.updated != post.created %}
         <time itemprop="dateUpdated" datetime="{{ post.updated }}">Updated on {{ post.updated|date:'d M Y' }}</time>
       {% endif %}
 
