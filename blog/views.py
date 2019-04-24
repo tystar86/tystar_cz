@@ -2,18 +2,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 from .models import Post, Category, Tag
+from base.views import _BASE_CONTEXT
 
 
-_BASE_CONTEXT = {
-        'name': 'Štěpánka',
-        'surname': 'Lucinová',
-        'email': 'stepankalucinova@gmail.com',
-        'twitter': 'https://twitter.com/tystarcz',
-        'linkedin': 'https://www.linkedin.com/in/stepankalucinova/',
-        'github': 'https://github.com/tystar86',
-    }
 def index(request):
     latest_posts_list = Post.objects.filter(is_public=True).order_by('-created')
+    categories = Category.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(latest_posts_list, 8)
 
@@ -26,6 +20,7 @@ def index(request):
 
     context = {
         'latest_posts': latest_posts,
+        'categories': categories,
     }
     context = {**context, **_BASE_CONTEXT}
 
@@ -37,6 +32,7 @@ def post(request, post_slug):
     context = {
         'post': post,
     }
+    context = {**context, **_BASE_CONTEXT}
 
     return render(request, 'blog/post.html', context)
 
@@ -46,6 +42,7 @@ def category(request, category_slug):
     context = {
         'category': category,
     }
+    context = {**context, **_BASE_CONTEXT}
 
     return render(request, 'blog/category.html', context)
 
@@ -55,6 +52,7 @@ def tag(request, tag_slug):
     context = {
         'tag': tag,
     }
+    context = {**context, **_BASE_CONTEXT}
 
     return render(request, 'blog/tag.html', context)
 

@@ -1,93 +1,24 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-{% load static %}
-
-{% load hosts %}
-
-<html lang="en">
-<head>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript">
-  function nav_display() {
-    var element = document.getElementById("nav");
-    element.classList.toggle("hide-nav");
-  }
-</script>
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="This is a blog about Python and Django and some stuff around.">
-  <link rel="canonical" href="http://tystar.cz/">
-
-  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
-  <link rel="icon" type="image/png" href="{% static 'images/tt_logo.png' %}">
-  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-
-  {% block headers %}
-
+{% block headers %}
+  <meta name="google-site-verification" content="j3CelnesDRzU1CTGGWHkXvsBb-PaXa2y1tWnyfXJ6R4" />
   <title>Homepage</title>
+{% endblock %}
 
-  {% endblock %}
-
-</head>
-<body>
-
-<div class="container">
-
-    <header onclick="nav_display()" id="nav" class="hide-nav" role="banner">
-        <div class="header-logo">
-            <a href="/"><img src="{% static 'images/me_photo.png' %}" width="60" height="60" alt="my photo"></a>
-        </div>
-        <h1 class="site-title">
-          <a href="/"><img src="{% static 'images/me_photo.png' %}" /></a>{{ name }} {{ surname }}
-          <span class="toggle"></span>
-        </h1>
-        <p class="tag-line">Me, myself & python.</p>
-        <ul class="nav-links">
-            <li><a href="{% host_url 'homepage' host 'www' %}">Home</a></li>
-            <li><a href="{% host_url 'about' host 'www' %}">About me</a></li>
-            <li><a href="{% host_url 'index' host 'blog' %}">PyBlog</a></li>
+{% block content %}
+  <main role="main">
+    <div>
+      <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
+        <ul>
+            {% for resource in resources %}
+                <li><a href="{{ resource.url }}" style="text-decoration: none;" target="_blank">{{ resource.name }}</a></li>
+                {% if resource.description %}
+                <ul>
+                  <li>{{ resource.description }}</li>
+                </ul>
+                {% endif %}
+            {% endfor %}
         </ul>
-    </header>
-
-    <main role="main">
-      {% block content %}
-
-      <div>
-        <h1>People, books, sites, podcasts I love, listen to, follow, admire, learn from.</h1>
-          <ul>
-              {% for resource in resources %}
-                  <li><a href="{{ resource.url }}" style="text-decoration: none;" target="_blank">{{ resource.name }}</a></li>
-                  {% if resource.description %}
-                  <ul>
-                    <li>{{ resource.description }}</li>
-                  </ul>
-                  {% endif %}
-              {% endfor %}
-          </ul>
-      </div>
-
-      {% endblock %}
-
-    </main>
-
-    <footer role="contentinfo">
-        <div class="hr"></div>
-        <div class="footer-link">
-            <a href="mailto:{{ email }}" target="_blank">Email</a>
-            <a href="{{ twitter }}" target="_blank">Twitter</a>
-            <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
-            <a href="{{ github }}" target="_blank">GitHub</a>
-        <br>
-        <br>
-        <p>Created by tystar 2019</p>
-    </footer>
-</div>
-
-</body>
-</html>
-
+    </div>
+  </main>
+{% endblock %}

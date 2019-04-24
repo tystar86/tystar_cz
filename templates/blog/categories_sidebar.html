@@ -1,0 +1,15 @@
+{% block categories_sidebar %}
+
+<nav class="sidebox">
+  <h4 class="sidebar">Categories</h4>
+  <ul class="index_tag">
+    {% for category in categories %}
+    <li class="tag">
+      <a href="/category/{{ category.slug }}">{{ category.name }}</a>
+      <span style="color: grey; font-size: 80%;">({{ category.post_set.count }})</span>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+{% load hosts %}
+
+<html lang="en">
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript">
+    function nav_display() {
+      var element = document.getElementById("nav");
+      element.classList.toggle("hide-nav");
+    }
+  </script>
+  <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This is a blog about Python and Django and some stuff around.">
+  <link rel="canonical" href="http://tystar.cz/">
+
+  <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/png" href="{% static 'images/tt_logo.png' %}">
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+{% block headers %}
+{% endblock %}
+
+</head>
+<body>
+
+<div class="container">
+
+{% block main_sidebar %}
+  {% include 'main_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block categories_sidebar %}
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock %}
+</div>
+
+</body>
+</html>
+
