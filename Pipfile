@@ -8,6 +8,7 @@ django = {editable = true, ref = "main", git = "git+https://github.com/django/dj
 dj-database-url = "*"
 django-extensions = "*"
 django-ckeditor = "*"
+waitress = "*"
 
 [dev-packages]
 
