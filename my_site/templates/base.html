@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en" id="top-of-site">
+    <head>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script type="text/javascript">
+            function nav_display() {
+            var element = document.getElementById("nav");
+            element.classList.toggle("hide-nav");
+            }
+        </script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Me, myself and python">
+        <link rel="canonical" href="http://tystar.cz/">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+        <link rel="icon" type="image/png" href="{% static 'my_site/images/tt_logo.png' %}">
+        <link rel="stylesheet" href="{% static 'my_site/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'my_site/css/skeleton.css' %}">
+        <link rel="stylesheet" href="{% static 'my_site/css/custom.css' %}">
+        {% block headers %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            {% block left_sidebar %}
+            {% include "partials/left_sidebar.html" %}
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+            {% comment %} {% block categories_sidebar %}
+            {% endblock %} {% endcomment %}
+
+            {% block footer %}
+            {% include "partials/footer.html" %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
