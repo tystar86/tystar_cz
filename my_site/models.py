@@ -1,6 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django_extensions.db.models import TimeStampedModel
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Resource(models.Model):
@@ -14,7 +15,7 @@ class Resource(models.Model):
 
 class Article(TimeStampedModel):
     title = models.CharField(max_length=200, unique=True)
-    content = models.TextField(blank=True)
+    content = RichTextUploadingField()
     is_public = models.BooleanField(default=False)
     slug = AutoSlugField(populate_from=["title"])
 

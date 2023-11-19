@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_extensions",
+    "ckeditor_uploader",
+    "ckeditor",
     "my_site",
 ]
 
@@ -115,3 +117,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CKEditor
+CKEDITOR_UPLOAD_PATH = "media/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": None,
+        "extraPlugins": "codesnippet",
+    },
+}
