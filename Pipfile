@@ -4,19 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {editable = true, ref = "main", git = "git+https://github.com/django/django.git"}
-dj-database-url = "*"
-django-extensions = "*"
-django-ckeditor = "*"
-waitress = "*"
+dj-database-url = "==2.1.0"
+django-extensions = "==3.2.3"
+django-ckeditor = "==6.7.0"
+waitress = "==2.1.2"
+django = "==4.2.7"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
-
-[pipenv]
-allow_prereleases = true
 
 [scripts]
 app = "python manage.py runserver"

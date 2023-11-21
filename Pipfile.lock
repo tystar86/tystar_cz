@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "827e0d31c8281d158afb8782ce29ae5697d9799fedc0cb19eb347cf11817836c"
+            "sha256": "c9c6cba419781dd587d22a9a3af4036a89424adf275dc5bcc54290b96aedc184"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,10 +33,13 @@
             "version": "==2.1.0"
         },
         "django": {
-            "editable": true,
-            "git": "git+https://github.com/django/django.git",
-            "markers": "python_version >= '3.10'",
-            "ref": "19c4052f98e5dc4fe9d7edd7125df6a66efbd79f"
+            "hashes": [
+                "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41",
+                "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==4.2.7"
         },
         "django-ckeditor": {
             "hashes": [
