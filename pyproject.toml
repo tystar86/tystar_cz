@@ -13,6 +13,8 @@ django-extensions = "3.2.3"
 django-ckeditor = "6.7.0"
 waitress = "2.1.2"
 psycopg2 = "^2.9.9"
+whitenoise = {extras = ["brotli"], version = "^6.6.0"}
+gunicorn = "^21.2.0"
 
 
 [build-system]
