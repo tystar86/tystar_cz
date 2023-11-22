@@ -1,11 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-import datetime
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from my_site.models import Article
+from my_site.models import Article, Category, Tag
+
 
 BASE_CONTEXT = {
     "name": "Štěpánka",
@@ -42,3 +40,13 @@ class BlogHomepage(ListView):
 class ArticleView(DetailView):
     model = Article
     template_name = "blog_article_detail.html"
+
+
+class CategoryView(DetailView):
+    model = Category
+    template_name = "blog_category_detail.html"
+
+
+class TagView(DetailView):
+    model = Tag
+    template_name = "blog_tag_detail.html"

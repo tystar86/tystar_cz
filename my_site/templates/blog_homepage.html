@@ -8,7 +8,7 @@
     <ul>
       {% for article in latest_articles %}
         <article itemscope="" itemtype="http://schema.org/Blog">
-          <h2 class="entry-title" itemprop="headline"><a href="{% url 'my_site:blog_article_detail' article.pk %}">{{ article.title }}</a></h2>
+          <h2 class="entry-title" itemprop="headline"><a href="{% url 'my_site:article' article.pk %}">{{ article.title }}</a></h2>
             <span class="entry-meta"><time itemprop="datePublished" datetime="{{ article.created }}">{{ article.created|date:'d M Y'  }}</ time></span>
       </article>
       {% endfor %}

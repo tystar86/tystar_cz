@@ -7,17 +7,17 @@
     <h1 class="entry-title" itemprop="headline">{{ article.title }}</h1>
       <span class="entry-meta">
         <time itemprop="datePublished" datetime="{{ article.created }}">Created on {{ article.created|date:'d M Y' }}&nbsp;&nbsp;&nbsp;</time>
-        {% if article.updated != article.created %}
-          <time itemprop="dateUpdated" datetime="{{ article.updated }}">Updated on {{ article.updated|date:'d M Y' }}</time>
+        {% if article.modified != article.created %}
+          <time itemprop="dateUpdated" datetime="{{ article.modified }}">Updated on {{ article.modified|date:'d M Y' }}</time>
         {% endif %}
         <ul class="index_category">
           {% for category in article.categories.all %}
-            <li><a href="{% url 'blog:category' category.slug %}">{{ category.name }}</a></li>
+            <li><a href="{% url 'my_site:category' category.slug %}">{{ category.name }}</a></li>
           {% endfor %}
         </ul>
         <ul class="index_tag">
           {% for tag in article.tags.all %}
-            <li><a href="{% url 'blog:tag' tag.slug %}">#{{ tag.name }}</a></li>
+            <li><a href="{% url 'my_site:tag' tag.slug %}">#{{ tag.name }}</a></li>
           {% endfor %}
         </ul>
       </span>
