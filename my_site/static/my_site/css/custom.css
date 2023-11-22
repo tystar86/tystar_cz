@@ -31,7 +31,7 @@ body {
   }
   .container {
     width: 90%;
-    max-width: 588px;
+    max-width: 60%;
     min-height: 95vh;
   }
   .header-logo img {
