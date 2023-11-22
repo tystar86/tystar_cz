@@ -39,14 +39,14 @@ class BlogHomepage(ListView):
 
 class ArticleView(DetailView):
     model = Article
-    template_name = "blog_article_detail.html"
+    template_name = "article.html"
 
 
 class CategoryView(DetailView):
     model = Category
-    template_name = "blog_category_detail.html"
+    template_name = "category.html"
 
 
 class TagView(DetailView):
     model = Tag
-    template_name = "blog_tag_detail.html"
+    template_name = "tag.html"

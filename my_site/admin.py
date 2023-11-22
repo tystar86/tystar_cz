@@ -24,7 +24,7 @@ admin.site.register(Resource, ResourceAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "created", "modified", "is_public", "slug")
+    list_display = ("id", "title", "created", "modified", "is_public")
     search_list = ["title", "content"]
     readonly_fields = ("slug",)
     list_filter = (
