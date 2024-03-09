@@ -1,0 +1,32 @@
+# The name of the app. Must be unique within a project.
+name: tystar_cz
+
+# The type of the application to build
+type: 'python:3.12'
+
+# The build-time dependencies of the app.
+dependencies:
+    python3:
+       pipenv: "2022.6.7"
+
+# The size of the persistent disk of the application (in MB)
+disk: 1024
+
+# Your app's configuration when it's exposed to the web.
+web:
+    upstream:
+        # Ensure your app listens on the right socket
+        socket_family: unix
+    commands:
+        # The exact command varies based on the server you use
+
+        # # 1) ASGI: daphne
+        # start: "pipenv run daphne app.asgi:application"
+        # # 2) ASGI: uvicorn
+        # start: "pipenv run gunicorn -k uvicorn.workers.UvicornWorker -w 4 -b unix:$SOCKET app.wsgi:application"
+        # # 3) ASGI: hypercorn
+        # start: "pipenv run hypercorn app.asgi:application"
+        # 4) WSGI: gunicorn
+        start: "pipenv run gunicorn -w 4 -b unix:$SOCKET app.wsgi:application"
+hooks:
+    build: pipenv install --system --deploy
