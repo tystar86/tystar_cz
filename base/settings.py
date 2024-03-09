@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+import json
+import base64
 
 
 
@@ -28,15 +31,14 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("ENV", "development") != "production"
 
-APP_HOSTS = []
-ALLOWED_HOSTS = ["*"] if DEBUG else APP_HOSTS
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".platformsh.site", "tystar.cz"]
 
-MY_EXTERNAL_HOSTNAME = os.environ.get('MY_EXTERNAL_HOSTNAME')
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    APP_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-if MY_EXTERNAL_HOSTNAME:
-    APP_HOSTS.append(MY_EXTERNAL_HOSTNAME)
+# MY_EXTERNAL_HOSTNAME = os.environ.get('MY_EXTERNAL_HOSTNAME')
+# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# if RENDER_EXTERNAL_HOSTNAME:
+#     APP_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# if MY_EXTERNAL_HOSTNAME:
+#     APP_HOSTS.append(MY_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -84,13 +86,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'base.wsgi.application'
-
-
-# Database
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-
-DATABASES = {"default": dj_database_url.config()}
 
 
 # Password validation
@@ -144,3 +139,65 @@ CKEDITOR_CONFIGS = {
         "extraPlugins": "codesnippet",
     },
 }
+
+
+# Database
+# Parse database configuration from $DATABASE_URL otherwise it's platform.sh
+
+if DEBUG:
+    import dj_database_url
+
+    DATABASES = {"default": dj_database_url.config()}
+
+
+#################################################################################
+# Platform.sh-specific configuration
+
+# This variable should always match the primary database relationship name,
+#   configured in .platform.app.yaml.
+PLATFORMSH_DB_RELATIONSHIP="database"
+
+# Helper function for decoding base64-encoded JSON variables.
+def decode(variable):
+    """Decodes a Platform.sh environment variable.
+    Args:
+        variable (string):
+            Base64-encoded JSON (the content of an environment variable).
+    Returns:
+        An dict (if representing a JSON object), or a scalar type.
+    Raises:
+        JSON decoding error.
+    """
+    try:
+        if sys.version_info[1] > 5:
+            return json.loads(base64.b64decode(variable))
+        else:
+            return json.loads(base64.b64decode(variable).decode('utf-8'))
+    except json.decoder.JSONDecodeError:
+        print('Error decoding JSON, code %d', json.decoder.JSONDecodeError)
+
+# Import some Platform.sh settings from the environment.
+if (os.getenv('PLATFORM_APPLICATION_NAME') is not None):
+    DEBUG = False
+    if (os.getenv('PLATFORM_APP_DIR') is not None):
+        STATIC_ROOT = os.path.join(os.getenv('PLATFORM_APP_DIR'), 'static')
+    if (os.getenv('PLATFORM_PROJECT_ENTROPY') is not None):
+        SECRET_KEY = os.getenv('PLATFORM_PROJECT_ENTROPY')
+    # Database service configuration, post-build only.
+    if (os.getenv('PLATFORM_ENVIRONMENT') is not None) and not DEBUG:
+        platformRelationships = decode(os.getenv('PLATFORM_RELATIONSHIPS'))
+        db_settings = platformRelationships[PLATFORMSH_DB_RELATIONSHIP][0]
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': db_settings['path'],
+                'USER': db_settings['username'],
+                'PASSWORD': db_settings['password'],
+                'HOST': db_settings['host'],
+                'PORT': db_settings['port'],
+            },
+            'sqlite': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+        }
