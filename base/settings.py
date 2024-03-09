@@ -33,13 +33,6 @@ DEBUG = os.environ.get("ENV", "development") != "production"
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".platformsh.site", "tystar.cz"]
 
-# MY_EXTERNAL_HOSTNAME = os.environ.get('MY_EXTERNAL_HOSTNAME')
-# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-# if RENDER_EXTERNAL_HOSTNAME:
-#     APP_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-# if MY_EXTERNAL_HOSTNAME:
-#     APP_HOSTS.append(MY_EXTERNAL_HOSTNAME)
-
 
 # Application definition
 
@@ -177,14 +170,14 @@ def decode(variable):
         print('Error decoding JSON, code %d', json.decoder.JSONDecodeError)
 
 # Import some Platform.sh settings from the environment.
-if (os.getenv('PLATFORM_APPLICATION_NAME') is not None):
+if (os.getenv('PLATFORM_APPLICATION_NAME') is not None) and not DEBUG:
     DEBUG = False
     if (os.getenv('PLATFORM_APP_DIR') is not None):
         STATIC_ROOT = os.path.join(os.getenv('PLATFORM_APP_DIR'), 'static')
     if (os.getenv('PLATFORM_PROJECT_ENTROPY') is not None):
         SECRET_KEY = os.getenv('PLATFORM_PROJECT_ENTROPY')
     # Database service configuration, post-build only.
-    if (os.getenv('PLATFORM_ENVIRONMENT') is not None) and not DEBUG:
+    if (os.getenv('PLATFORM_ENVIRONMENT') is not None):
         platformRelationships = decode(os.getenv('PLATFORM_RELATIONSHIPS'))
         db_settings = platformRelationships[PLATFORMSH_DB_RELATIONSHIP][0]
         DATABASES = {
