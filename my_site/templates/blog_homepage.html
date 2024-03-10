@@ -1,47 +1,48 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block headers %}<title>PyBlog | Home</title>{%
+endblock %} {% block content %}
 
-{% block headers %}<title>PyBlog | Home</title>{% endblock %}
-
-{% block content %}
-
-<main role="main" style="padding-bottom: 2.5rem;">
-    <ul>
-      {% for article in latest_articles %}
-        <article itemscope="" itemtype="http://schema.org/Blog">
-          <h2 class="entry-title" itemprop="headline"><a href="{% url 'my_site:article' article.slug %}">{{ article.title }}</a></h2>
-            <span class="entry-meta"><time itemprop="datePublished" datetime="{{ article.created }}">{{ article.created|date:'d M Y'  }}</ time></span>
-      </article>
-      {% endfor %}
-    </ul>
-    {% if latest_articles.has_other_pages %}
-      <ul class="pagination">
-        {% if latest_articles.has_previous %}
-          <a href="?page=1">&laquo;</a>
-          <li><a href="?page={{ latest_articles.previous_page_number }}">&lsaquo;</a></li>
-        {% else %}
-          <li class="disabled"><span>&laquo;</span></li>
-          <li class="disabled"><span>&lsaquo;</span></li>
-        {% endif %}
-        {% for i in latest_articles.paginator.page_range %}
-          {% if latest_articles.number == i %}
-            <li class="active"><span>{{ i }}</span></li>
-          {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
-        {% if latest_articles.has_next %}
-          <li><a href="?page={{ latest_articles.next_page_number }}">&rsaquo;</a></li>
-          <a href="?page={{ latest_articles.paginator.num_pages }}">&raquo;</a>
-        {% else %}
-          <li class="disabled"><span>&rsaquo;</span></li>
-          <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-      </ul>
+<main role="main" style="padding-bottom: 2.5rem">
+  <ul>
+    {% for article in latest_articles %}
+    <article itemscope="" itemtype="http://schema.org/Blog">
+      <h2 class="entry-title" itemprop="headline">
+        <a href="{% url 'my_site:article' article.slug %}"
+          >{{ article.title }}</a
+        >
+      </h2>
+      <span class="entry-meta"
+        ><time itemprop="datePublished" datetime="{{ article.created }}"
+          >{{ article.created|date:'d M Y' }}</time
+        ></span
+      >
+    </article>
+    {% endfor %}
+  </ul>
+  {% if latest_articles.has_other_pages %}
+  <ul class="pagination">
+    {% if latest_articles.has_previous %}
+    <a href="?page=1">&laquo;</a>
+    <li>
+      <a href="?page={{ latest_articles.previous_page_number }}">&lsaquo;</a>
+    </li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    <li class="disabled"><span>&lsaquo;</span></li>
+    {% endif %} {% for i in latest_articles.paginator.page_range %} {% if
+    latest_articles.number == i %}
+    <li class="active"><span>{{ i }}</span></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %} {% endfor %} {% if latest_articles.has_next %}
+    <li><a href="?page={{ latest_articles.next_page_number }}">&rsaquo;</a></li>
+    <a href="?page={{ latest_articles.paginator.num_pages }}">&raquo;</a>
+    {% else %}
+    <li class="disabled"><span>&rsaquo;</span></li>
+    <li class="disabled"><span>&raquo;</span></li>
     {% endif %}
-  </main>
+  </ul>
+  {% endif %}
+</main>
 
-{% endblock %}
-
-{% block categories_sidebar %}
-  {% include "categories_sidebar.html" %}
-{% endblock %}
+{% endblock %} {% block categories_sidebar %} {% include
+"categories_sidebar.html" %} {% endblock %}

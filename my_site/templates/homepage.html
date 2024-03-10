@@ -1,23 +1,25 @@
-{% extends "base.html" %}
-
-{% load static %}
-
-{% block headers %}<title>Home</title>{% endblock %}
-{% block content %}
-  <main role="main" style="padding-bottom: 2.5rem;">
-    <div>
-      <h1>Resources</h1>
-      <p>
-        <ul>
-            {% for resource in resources %}
-                <li><a href="{{ resource.url }}" style="text-decoration:none;" target="_blank">{{ resource.name }}</a></li>
-                {% if resource.description %}
-                <ul>
-                  <li>{{ resource.description }}</li>
-                </ul>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-  </main>
+{% extends "base.html" %} {% load static %} {% block headers
+%}<title>Home</title>{% endblock %} {% block content %}
+<main role="main" style="padding-bottom: 2.5rem">
+  <div>
+    <h1>Resources</h1>
+    <p></p>
+    <ul>
+      {% for resource in resources %}
+      <li>
+        <a
+          href="{{ resource.url }}"
+          style="text-decoration: none"
+          target="_blank"
+          >{{ resource.name }}</a
+        >
+      </li>
+      {% if resource.description %}
+      <ul>
+        <li>{{ resource.description }}</li>
+      </ul>
+      {% endif %} {% endfor %}
+    </ul>
+  </div>
+</main>
 {% endblock %}
