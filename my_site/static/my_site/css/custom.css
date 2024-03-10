@@ -140,28 +140,16 @@ body {
   .nav-links img{
     width: 20px;
   }
-  /* .top-of-site-link {
+  .top-of-site-link {
+    visibility: hidden;
     opacity: 1;
-    visibility: visible;
-    transition: .2s;
+    transition: 0.2s;
     position: fixed;
     bottom: 1.2rem;
     right: 1.5rem;
     z-index: 15;
-  } */
-  .top-of-site-link {
-    visibility:hidden;
-    opacity:0;
-    transition:.2s;
-    position:fixed;
-    bottom:1.2rem;
-    right:1.5rem;
-    z-index:15
-   }
-   .top-of-site-link[data-visible=true] {
-    opacity:1;
-    visibility:visible;
-   }
+    margin-right: 10rem;
+  }
    .top-of-site-link svg {
     -webkit-filter:drop-shadow(0 2px 5px rgba(0,0,0,.3));
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.3))

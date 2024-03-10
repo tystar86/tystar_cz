@@ -30,6 +30,6 @@ Initialize database.
 ```pipenv run migrate```
 ## Development
 Start the server process.
-```pipenv run runserver```
+```pipenv run app```
 ### Tests
-```pipenv run test```
+```pipenv run pytest```

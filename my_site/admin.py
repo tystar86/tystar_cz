@@ -1,5 +1,5 @@
 from django.contrib import admin
-from my_site.models import Article, Resource, Tag, Category
+from my_site.models import Article, Resource, Tag, Category, Project
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -34,3 +34,11 @@ class ArticleAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Article, ArticleAdmin)
+
+
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "description", "url")
+    search_list = ["title", "description", "technologies"]
+
+
+admin.site.register(Project, ProjectAdmin)

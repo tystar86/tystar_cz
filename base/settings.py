@@ -108,6 +108,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_ROOT = BASE_DIR / 'uploads/'
+MEDIA_URL = 'media/'
 
 
 # Following settings only make sense on production and may break development environments.
