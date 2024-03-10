@@ -1,25 +1,19 @@
-{% extends "blog_homepage.html" %} {% block headers %}<title>
-  PyBlog | Category</title
->{% endblock %} {% block content %}
+{% extends "blog_homepage.html" %}
 
-<main role="main" style="padding-bottom: 2.5rem">
-  <h1>{{ category.name }}</h1>
-  <ul>
-    {% for article in category.article_set.all %}
-    <article itemscope="" itemtype="http://schema.org/Blog">
-      <h2 class="entry-title" itemprop="headline">
-        <a href="{% url 'my_site:article' article.slug %}"
-          >{{ article.title }}</a
-        >
-      </h2>
-      <span class="entry-meta"
-        ><time itemprop="datePublished" datetime="{{ article.created }}"
-          >{{ article.created|date:'d M Y' }}</time
-        ></span
-      >
-    </article>
-    {% endfor %}
-  </ul>
+{% block headers %}<title>PyBlog | Category</title>{% endblock %}
+
+{% block content %}
+
+<main role="main" style="padding-bottom: 2.5rem;">
+    <h1>{{ category.name }}</h1>
+    <ul>
+        {% for article in category.article_set.all %}
+        <article itemscope="" itemtype="http://schema.org/Blog">
+            <h2 class="entry-title" itemprop="headline"><a href="{% url 'my_site:article' article.slug %}">{{ article.title }}</a></h2>
+            <span class="entry-meta"><time itemprop="datePublished" datetime="{{ article.created }}">{{ article.created|date:'d M Y' }}</time></span>
+        </article>
+        {% endfor %}
+    </ul>
 </main>
 
 {% endblock %}

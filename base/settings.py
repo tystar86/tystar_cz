@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-import base64
-import json
+from pathlib import Path
 import os
 import sys
-from pathlib import Path
+import json
+import base64
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,12 +37,12 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".platformsh.site", "tystar.cz"]
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     "django_extensions",
     "ckeditor_uploader",
     "ckeditor",
@@ -48,54 +50,54 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = "base.urls"
+ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "base.wsgi.application"
+WSGI_APPLICATION = 'base.wsgi.application'
 
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -105,21 +107,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
 
 
 # Following settings only make sense on production and may break development environments.
-if not DEBUG:  # Tell Django to copy statics to the `staticfiles` directory
+if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CKEditor
 CKEDITOR_UPLOAD_PATH = "media/"
@@ -146,7 +148,7 @@ if DEBUG:
 
 # This variable should always match the primary database relationship name,
 #   configured in .platform.app.yaml.
-PLATFORMSH_DB_RELATIONSHIP = "database"
+PLATFORMSH_DB_RELATIONSHIP="database"
 
 # Helper function for decoding base64-encoded JSON variables.
 def decode(variable):
@@ -163,33 +165,32 @@ def decode(variable):
         if sys.version_info[1] > 5:
             return json.loads(base64.b64decode(variable))
         else:
-            return json.loads(base64.b64decode(variable).decode("utf-8"))
+            return json.loads(base64.b64decode(variable).decode('utf-8'))
     except json.decoder.JSONDecodeError:
-        print("Error decoding JSON, code %d", json.decoder.JSONDecodeError)
-
+        print('Error decoding JSON, code %d', json.decoder.JSONDecodeError)
 
 # Import some Platform.sh settings from the environment.
-if (os.getenv("PLATFORM_APPLICATION_NAME") is not None) and not DEBUG:
+if (os.getenv('PLATFORM_APPLICATION_NAME') is not None) and not DEBUG:
     DEBUG = False
-    if os.getenv("PLATFORM_APP_DIR") is not None:
-        STATIC_ROOT = os.path.join(os.getenv("PLATFORM_APP_DIR"), "static")
-    if os.getenv("PLATFORM_PROJECT_ENTROPY") is not None:
-        SECRET_KEY = os.getenv("PLATFORM_PROJECT_ENTROPY")
+    if (os.getenv('PLATFORM_APP_DIR') is not None):
+        STATIC_ROOT = os.path.join(os.getenv('PLATFORM_APP_DIR'), 'static')
+    if (os.getenv('PLATFORM_PROJECT_ENTROPY') is not None):
+        SECRET_KEY = os.getenv('PLATFORM_PROJECT_ENTROPY')
     # Database service configuration, post-build only.
-    if os.getenv("PLATFORM_ENVIRONMENT") is not None:
-        platformRelationships = decode(os.getenv("PLATFORM_RELATIONSHIPS"))
+    if (os.getenv('PLATFORM_ENVIRONMENT') is not None):
+        platformRelationships = decode(os.getenv('PLATFORM_RELATIONSHIPS'))
         db_settings = platformRelationships[PLATFORMSH_DB_RELATIONSHIP][0]
         DATABASES = {
-            "default": {
-                "ENGINE": "django.db.backends.postgresql",
-                "NAME": db_settings["path"],
-                "USER": db_settings["username"],
-                "PASSWORD": db_settings["password"],
-                "HOST": db_settings["host"],
-                "PORT": db_settings["port"],
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': db_settings['path'],
+                'USER': db_settings['username'],
+                'PASSWORD': db_settings['password'],
+                'HOST': db_settings['host'],
+                'PORT': db_settings['port'],
             },
-            "sqlite": {
-                "ENGINE": "django.db.backends.sqlite3",
-                "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-            },
+            'sqlite': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
         }
