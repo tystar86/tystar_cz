@@ -13,6 +13,7 @@ psycopg2-binary = "==2.9.9"
 whitenoise = {extras = ["brotli"], version = "==6.6.0"}
 gunicorn = "==21.2.0"
 django-ckeditor = "*"
+pre-commit = "*"
 
 [dev-packages]
 

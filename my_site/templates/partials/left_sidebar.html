@@ -1,19 +1,25 @@
-{% load static %}
+{% load static %} {% block left_sidebar %}
 
-{% block left_sidebar %}
-
- <header>
-    <div class="header-logo">
-        <img src="{% static 'my_site/images/me_photo.png' %}" width="60" height="60" alt="my photo">
-    </div>
-    <h1 class="site-title">{{ name }} {{ surname }}</h1>
-    <p class="tag-line">Me, myself & python</p>
-    <ul class="nav-links">
-        <li><a href="{% url 'my_site:homepage' %}">Home</a></li>
-        <li><a href="{% url 'my_site:about' %}">About me</a></li>
-        <li><a href="{% url 'my_site:blog_homepage' %}">PyBlog</a></li>
-        <li><a href="https://tystar.rajce.idnes.cz/" target="_blank">Travel</a></li>
-    </ul>
+<header>
+  <div class="header-logo">
+    <img
+      src="{% static 'my_site/images/me_photo.png' %}"
+      width="60"
+      height="60"
+      alt="my photo"
+    />
+  </div>
+  <h1 class="site-title">{{ name }} {{ surname }}</h1>
+  <p class="tag-line">Me, myself & python</p>
+  <ul class="nav-links">
+    <li><a href="{% url 'my_site:homepage' %}">Home</a></li>
+    <li><a href="{% url 'my_site:about' %}">About me</a></li>
+    <li><a href="{% url 'my_site:blog_homepage' %}">PyBlog</a></li>
+    <li>
+      <a href="{% url 'my_site:portfolio' %}" target="_blank">Portfolio</a>
+    </li>
+    <li><a href="https://tystar.rajce.idnes.cz/" target="_blank">Travel</a></li>
+  </ul>
 </header>
 
 {% endblock %}
