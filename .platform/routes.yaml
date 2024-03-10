@@ -3,12 +3,12 @@
 # Each route describes how an incoming URL is going
 # to be processed by Platform.sh.
 # More information: https://docs.platform.sh/define-routes.html
-"https://{default}/":
+'https://{default}/':
   type: upstream
-  upstream: "tystar_cz:http"
+  upstream: 'tystar_cz:http'
 
 # A basic redirect definition
 # More information: https://docs.platform.sh/define-routes.html#basic-redirect-definition
-"https://www.{default}/":
+'https://www.{default}/':
   type: redirect
-  to: "https://{default}/"
+  to: 'https://{default}/'

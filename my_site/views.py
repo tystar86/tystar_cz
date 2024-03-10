@@ -1,9 +1,8 @@
 from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
-from my_site.models import Article, Category, Tag, Project
-
+from my_site.models import Article, Category, Project, Tag
 
 BASE_CONTEXT = {
     "name": "Štěpánka",
@@ -59,7 +58,7 @@ class BlogHomepage(ListView):
             "resources": resources,
             **BASE_CONTEXT,
         }
-    
+
 
 class ArticleView(DetailView):
     model = Article
