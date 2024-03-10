@@ -4,6 +4,7 @@ from django_extensions.db.models import TimeStampedModel
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=30)
     slug = AutoSlugField(unique=True, max_length=30, populate_from=["name"])
@@ -44,13 +45,3 @@ class Article(TimeStampedModel):
 
     def __str__(self):
         return self.title
-
-
-class Project(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    url = models.URLField(max_length=200, unique=True)
-    github_url = models.URLField(max_length=200, unique=True)
-    image = models.FileField(upload_to="project_images/", blank=True)
-
-    technologies = models.ManyToManyField(Tag, blank=True)

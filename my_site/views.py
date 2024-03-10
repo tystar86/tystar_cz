@@ -1,8 +1,9 @@
 from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
-from my_site.models import Article, Category, Project, Tag
+from my_site.models import Article, Category, Tag
+
 
 BASE_CONTEXT = {
     "name": "Štěpánka",
@@ -25,34 +26,16 @@ class About(TemplateView):
     template_name = "about.html"
 
 
-class Portfolio(ListView):
-    model = Project
-    template_name = "portfolio.html"
-
-    def get_context_data(self, **kwargs):
-        projects = Project.objects.all()
-
-        return {"projects": projects, **BASE_CONTEXT}
-
-
 class BlogHomepage(ListView):
     model = Article
     template_name = "blog_homepage.html"
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self):
         latest_articles = Article.objects.all()
-        categories = []  # TODO: display categories
-        tags = []  # TODO: display tags
-        resources = []  # TODO: display resources
-
-        return {
-            "latest_articles": latest_articles,
-            "categories": categories,
-            "tags": tags,
-            "resources": resources,
-            **BASE_CONTEXT,
-        }
-
+        categories = []
+        context = {"latest_articles": latest_articles, "categories": categories, **BASE_CONTEXT}
+        return context
+    
 
 class ArticleView(DetailView):
     model = Article
